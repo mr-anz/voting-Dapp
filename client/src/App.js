@@ -10,7 +10,7 @@ import { useStateContext } from './context';
 function App() {
 
   return (
-    <div className="h-full bg-black glass">
+    <div className="h-screen bg-black glass">
     <Navbar />
    
     <Routes>
