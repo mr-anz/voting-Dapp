@@ -34,8 +34,8 @@ const CreatePoll = () => {
     });
 
     const handleSubmit = async(e) => {
+        e.preventDefault()
         if(account){
-            e.preventDefault()
             if(!name || !description || !image) return alert('plz fill in the form') 
             await write()
             onClose()

@@ -56,8 +56,8 @@ const Project = () => {
     }); 
 
     const handleSubmit = async(e) => {
+      e.preventDefault()
       if(account){
-          e.preventDefault()
           await write()
       } else{
           alert('Connect to metamask')
