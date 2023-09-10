@@ -37,7 +37,7 @@ const CreatePoll = () => {
         e.preventDefault()
         if(account){
             if(!name || !description || !image) return alert('plz fill in the form') 
-            await write()
+            await write?.()
             onClose()
         } else{
             alert('Connect to metamask')
@@ -52,7 +52,7 @@ const CreatePoll = () => {
     }
     
     useEffect(() => {
-        refetchCandidates()
+        refetchCandidates?.()
     }, [isSuccess]);
 
   return (

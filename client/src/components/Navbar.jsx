@@ -15,13 +15,13 @@ const Navbar = () => {
   setAccount(address)
   const handleDisconnect = async(e) => {
     e.preventDefault()
-    await disconnect()
+    await disconnect?.()
     setAccount('')
   }
 
   const handleClick = async(e) => {
     e.preventDefault()
-    await connect()
+    await connect?.()
     setAccount(address)
   }
   return (

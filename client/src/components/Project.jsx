@@ -58,15 +58,15 @@ const Project = () => {
     const handleSubmit = async(e) => {
       e.preventDefault()
       if(account){
-          await write()
+        write?.()
       } else{
           alert('Connect to metamask')
       }   
   }
       
     useEffect(() => {
-      refetchVotes()
-      refetchParticipants()
+      refetchVotes?.()
+      refetchParticipants?.()
   }, [isSuccess]);
 
   return (
