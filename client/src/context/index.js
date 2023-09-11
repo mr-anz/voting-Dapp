@@ -60,37 +60,33 @@ export const ContextProvider = ({children}) => {
             const provider = new ethers.providers.Web3Provider(ethereum)
             const signer = provider.getSigner()
             const contract = new ethers.Contract(contractAddress, contractAbi, signer)
-        
             return contract
         } else {
             console.log('plz connect wallet')
          }
     }
 
-    const addCandidate = async(data) => {
+    const addCandidate = async({name, description, image}) => {
         if(!ethereum) return ('plz install metamsk') 
         const contract = await getContract()
-        tx = await contract.addCandidate(data)
+        tx = await contract.addCandidate(name, description, image)
         await tx.wait()
-        await getCandidates()
-        
+        await getCandidates()        
     }
 
-    const vote = async(id) => {
+    const addVote = async(id) => {
         if(!ethereum) return ('plz install metamsk') 
         const contract = await getContract()
         tx = await contract.vote(id)
         await tx.wait()
-        await getVotes(id)
-        
+        await getVotes(id)        
     }
 
     const getCandidates = async() => {
         if (address) {
             const contract = await getContract()
             tx = await contract.getCandidates()
-            setCandidates(tx)
-            console.log(candidates)
+            setCandidates(tx)      
         } 
     }
 
@@ -99,7 +95,6 @@ export const ContextProvider = ({children}) => {
             const contract = await getContract()
             tx = await contract.getCandidate(id)
             setCandidate(tx)
-            console.log(candidate)
         } 
     }
 
@@ -108,7 +103,6 @@ export const ContextProvider = ({children}) => {
             const contract = await getContract()
             tx = await contract.getVotes(id)
             setVoters(tx)
-            console.log(voters)
         } 
     }
 
@@ -117,7 +111,6 @@ export const ContextProvider = ({children}) => {
             const contract = await getContract()
             tx = await contract.getParticipants(id)
             setParticipants(tx)
-            console.log(participants)
         } 
     }
 
@@ -126,7 +119,7 @@ export const ContextProvider = ({children}) => {
     return (
         <StateContext.Provider value={{candidate, setCandidate, createPoll, setCreatePoll, 
         contractAddress, contractAbi, account, voters, participants, setParticipants, setAccount,
-         setVoters, candidates, setCandidates, vote, getParticipants, getVotes, getCandidate, 
+         setVoters, candidates, setCandidates, addVote, getParticipants, getVotes, getCandidate, 
          getCandidates, addCandidate, connectWallet, isWallectConnected }}>
             {children}
         </StateContext.Provider>
