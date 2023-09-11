@@ -28,9 +28,6 @@ const CreatePoll = () => {
       onSuccess(data) {
         setCandidates(data)
       },
-      onError(error) {
-        alert("Error", error);
-      },
     });
 
     const handleSubmit = async(e) => {

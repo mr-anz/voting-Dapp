@@ -36,10 +36,7 @@ const Project = () => {
       args: [id],
       onSuccess(data) {
         setVoters(data)
-      },
-      onError(error) {
-        alert("Error", error);
-      },
+      }
     });    
 
     const { refetch: refetchParticipants } = useContractRead({
@@ -49,10 +46,7 @@ const Project = () => {
       args: [id],
       onSuccess(data) {
         setParticipants(data)
-      },
-      onError(error) {
-        alert("Error", error);
-      },
+      }
     }); 
 
     const handleSubmit = async(e) => {
