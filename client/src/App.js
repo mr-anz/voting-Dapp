@@ -4,10 +4,18 @@ import Projects from './pages/Projects';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import { useEffect } from 'react';
-import { useContractRead } from 'wagmi';
 import { useStateContext } from './context';
 
 function App() {
+  const { isWallectConnected, getCandidates, connectWallet } = useStateContext()
+
+  useEffect(()=>{
+    const fetch = async() => {
+      await isWallectConnected()
+      await getCandidates()
+    }
+    fetch()
+  },[])
 
   return (
     <div className="h-screen bg-black glass">

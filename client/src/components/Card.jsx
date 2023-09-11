@@ -4,7 +4,7 @@ import { useStateContext } from '../context'
 
 const Card = () => {
     
-    const { candidates} = useStateContext()
+    const { candidates, getCandidate } = useStateContext()
     
 
   return (
@@ -15,7 +15,7 @@ const Card = () => {
                     candidates?.map((items, key) => (
                         
                         <article className="w-[320px] mx-auto mt-4 shadow-lg border rounded-md duration-300 hover:shadow-sm" key={key}>
-                            <Link to={'/projects/' + (key+1)}>
+                            <Link onClick={()=>{getCandidate(key)}} to={'/projects/' + (key+1)}>
                                 <img src={items.imageUri} loading="lazy" alt={items.name}  className="w-full h-48 rounded-t-md" />
                                 <div className="flex items-center mt-2 pt-3 ml-4 mr-2">
                                     <div className="flex-none w-10 h-10 rounded-full">

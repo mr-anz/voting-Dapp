@@ -1,40 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import  {FaTimes} from 'react-icons/fa'
-import { useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
 import { useStateContext } from '../context'
 
 const CreatePoll = () => {
-    const {createPoll, setCreatePoll , account, contractAbi, contractAddress, setCandidates } = useStateContext()
+    const {createPoll, setCreatePoll , account, getCandidates, addCandidate} = useStateContext()
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [image, setImage] = useState('')
 
-    const { config } = usePrepareContractWrite({
-        address: contractAddress,
-        abi: contractAbi,
-        functionName: 'addCandidate',
-        args: [name, description, image]
-    })
-    const {write,data} = useContractWrite(config)
-
-    const { isSuccess } = useWaitForTransaction({
-      hash: data?.hash,
-    })
-
-    const { refetch: refetchCandidates } = useContractRead({
-      address: contractAddress,
-      abi: contractAbi,
-      functionName: 'getCandidates',
-      onSuccess(data) {
-        setCandidates(data)
-      },
-    });
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        const data = {name, description, image}
         if(account){
             if(!name || !description || !image) return alert('plz fill in the form') 
-            await write?.()
+            await addCandidate(data)
             onClose()
         } else{
             alert('Connect to metamask')
@@ -49,8 +29,8 @@ const CreatePoll = () => {
     }
     
     useEffect(() => {
-        refetchCandidates?.()
-    }, [isSuccess]);
+        getCandidates()
+    }, [handleSubmit]);
 
   return (
     <div className={`fixed h-screen w-screen top-0 z-50 left-0 flex items-center justify-center

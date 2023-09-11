@@ -22,7 +22,7 @@ const Hero = () => {
               <p className="mb-5">This online voting system offers the highest level of transparency, control, security and efficiency of election proccesses using Blockchain Technology.</p>
               <button className="btn bg-[#c6f219] glass" onClick={handle}>Create Poll</button>
             </div>
-            <img src={'/pl.svg'}  alt="This is an " className='w-[500px] h-[500px]'/>
+            <img src={'/pl.svg'}  alt="hero" className='w-[500px] h-[500px]'/>
         </div>
         
     </div>
